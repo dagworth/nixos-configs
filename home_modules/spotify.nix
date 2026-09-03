@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.spotify = {
-    enable = true;
-  };
+  home.packages = [
+    pkgs.spotify-spotx
+  ];
 }

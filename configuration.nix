@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ./sys_modules/hyprland.nix
+      ./sys_modules/overlays.nix
       <home-manager/nixos>
     ];
 
