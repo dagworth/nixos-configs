@@ -15,7 +15,8 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.larry = import ./home.nix;
- #c home-manager.backupFileExtension = "backup";
+  # Existing unmanaged dotfiles get moved to *.backup instead of blocking activation.
+  home-manager.backupFileExtension = "backup";
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -77,19 +78,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  # Install firefox.
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    htop
-    kitty
-    brightnessctl
-    quickshell
-    firefox
-  ];
 
   system.stateVersion = "26.05";
 
