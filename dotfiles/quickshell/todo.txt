@@ -1,0 +1,15 @@
+todo:
+bluetooth redesign and close when click
+activewindow redesign
+notification window needs hitbox fixing
+bluetooth giving warnings
+some 
+
+learn:
+command in weathertime and sound1
+scripts
+discord
+
+optional:
+untrust bluetooth
+try to rewrite bluetooth with ctl

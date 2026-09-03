@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <style>
+        :root {
+            --bg-color: #1C1B22;
+            --sidebar-bg: #1C1B22;
+            --master-nav-bg: #0C0C0F;
+            --text-main: #fbfbfe;
+            --text-muted: #cfcfd8;
+            --accent-purple: #9462ff;
+            --accent-blue: #00ddff;
+            --border-gray: #3f3f44;
+            --input-bg: #42414d;
+            --danger: #ff5a5a;
+            --nav-width: 50px;
+            --panel-width: 250px;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            display: flex; height: 100vh; overflow: hidden;
+        }
+
+        /* --- MASTER ICON SIDEBAR --- */
+        .master-nav {
+            width: var(--nav-width);
+            background-color: var(--master-nav-bg);
+            border-right: 1px solid var(--border-gray);
+            display: flex; flex-direction: column;
+            align-items: center; padding-top: 20px; gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem; cursor: pointer;
+            opacity: 0.6; transition: all 0.2s;
+            padding: 10px; border-radius: 8px;
+        }
+        .nav-icon:hover, .nav-icon.active { opacity: 1; background: var(--input-bg); }
+        .nav-icon.active { color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+
+        /* --- POPUP PANELS --- */
+        .panel {
+            position: absolute;
+            left: var(--nav-width);
+            top: 0; bottom: 0;
+            width: var(--panel-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-gray);
+            display: flex; flex-direction: column;
+            padding: 20px;
+            transform: translateX(-110%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 50;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+        }
+
+        .panel.open { transform: translateX(0); }
+
+        /* --- NOTES TEXTAREA --- */
+        #notes-scratchpad {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            padding-top: 10px;
+        }
+
+        /* --- ALIAS MANAGER --- */
+        .alias-header { margin-bottom: 15px; }
+        .alias-search {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--master-nav-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .alias-search:focus { border-color: var(--accent-blue); }
+
+        .alias-add-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-gray); }
+
+        /* --- SEARCH CONTENT --- */
+        .main-content {
+            flex-grow: 1; display: flex; flex-direction: column;
+            align-items: center; padding-top: 18vh;
+        }
+        .search-container { width: 100%; max-width: 480px; text-align: center; position: relative; }
+        .search-bar {
+            width: 100%; padding: 12px 18px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px; color: var(--text-main);
+            font-size: 1.1rem; outline: none; box-sizing: border-box;
+        }
+        .search-bar:focus { box-shadow: 0 0 0 2px var(--accent-purple); }
+
+        .search-preview {
+            position: absolute; top: 100%; left: 0; right: 0;
+            margin-top: 10px; padding: 12px;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--accent-purple);
+            border-radius: 8px; text-align: left;
+            font-size: 0.9rem; color: var(--text-muted);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none; z-index: 10;
+        }
+
+        .preview-label { font-size: 0.7rem; text-transform: uppercase; color: var(--accent-purple); margin-bottom: 4px; display: block; }
+        .preview-dest { color: var(--text-main); font-weight: 500; word-break: break-all; }
+
+        .input-box {
+            width: 100%; padding: 8px 10px; background: var(--input-bg);
+            border: 1px solid transparent; border-radius: 4px;
+            color: var(--text-main); outline: none;
+            box-sizing: border-box;
+        }
+        .list-container { flex-grow: 1; overflow-y: auto; list-style: none; padding: 0; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid var(--border-gray); display: flex; justify-content: space-between; align-items: flex-start; }
+        .alias-tag { font-size: 0.65rem; color: var(--accent-blue); font-weight: bold; text-transform: uppercase; }
+        .fav-link { font-size: 0.85rem; text-decoration: none; color: var(--text-muted); }
+        .fav-link:hover { color: var(--text-main); }
+        .controls { display: flex; gap: 6px; }
+        .icon-btn { cursor: pointer; opacity: 0.6; }
+        .icon-btn:hover { opacity: 1; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-gray); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav class="master-nav">
+        <div class="nav-icon" id="btn-notes" onclick="togglePanel('panel-notes', 'btn-notes')" title="Notes">📝</div>
+        <div class="nav-icon" id="btn-aliases" onclick="togglePanel('panel-aliases', 'btn-aliases')" title="Aliases">🔗</div>
+    </nav>
+
+    <aside id="panel-notes" class="panel">
+        <textarea id="notes-scratchpad" placeholder="notes"></textarea>
+    </aside>
+
+    <aside id="panel-aliases" class="panel">
+        <h3 style="margin-top:0; font-size: 0.9rem; color: var(--accent-blue)">ALIASES</h3>
+        
+        <input type="text" id="alias-filter" class="alias-search" placeholder="filter" autocomplete="off">
+
+        <div class="alias-add-group">
+            <input type="text" id="alias-key" class="input-box" placeholder="key" autocomplete="off">
+            <input type="text" id="alias-url" class="input-box" placeholder="url" autocomplete="off">
+        </div>
+        
+        <ul id="alias-list" class="list-container"></ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="search-container">
+            <form id="search-form" action="https://duckduckgo.com/" method="get">
+                <input type="text" name="q" id="main-search" class="search-bar" placeholder="search" autofocus autocomplete="off">
+            </form>
+            <div id="search-preview" class="search-preview">
+                <span class="preview-label" id="preview-label">Destination</span>
+                <span id="preview-text" class="preview-dest"></span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const alias_name = 'hiiii'
+
+        function solveMath(query) {
+            if (!/[0-9]/.test(query) || !/[\+\-\*\/\^\(\)]|sqrt/.test(query)) return null;
+
+            try {
+                let expression = query
+                    .replace(/\^/g, '**')
+                    .replace(/sqrt/g, 'Math.sqrt')
+                    .replace(/(\d)\(/g, '$1*(')
+                    .replace(/\)(\d)/g, ')*$1');
+
+                const openCount = (expression.match(/\(/g) || []).length;
+                const closeCount = (expression.match(/\)/g) || []).length;
+
+                if (openCount < closeCount) {
+                    expression = '('.repeat(closeCount - openCount) + expression;
+                } else if (openCount > closeCount) {
+                    // Extra ( on the left: add ) to the very end
+                    expression = expression + ')'.repeat(openCount - closeCount);
+                }
+
+                const result = new Function(`return ${expression}`)();
+                
+                return (typeof result === 'number' && isFinite(result)) ? result : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function togglePanel(panelId, btnId) {
+            const panels = ['panel-notes', 'panel-aliases'];
+            const buttons = ['btn-notes', 'btn-aliases'];
+            const targetPanel = document.getElementById(panelId);
+            const targetBtn = document.getElementById(btnId);
+            const isOpen = targetPanel.classList.contains('open');
+
+            panels.forEach(id => document.getElementById(id).classList.remove('open'));
+            buttons.forEach(id => document.getElementById(id).classList.remove('active'));
+
+            if (!isOpen) {
+                targetPanel.classList.add('open');
+                targetBtn.classList.add('active');
+                if(panelId === 'panel-aliases') document.getElementById('alias-filter').focus();
+            }
+        }
+
+        /* --- NOTES LOGIC --- */
+        const scratchpad = document.getElementById('notes-scratchpad');
+        scratchpad.value = localStorage.getItem(alias_name) || "";
+        scratchpad.addEventListener('input', () => {
+            localStorage.setItem('my-scratchpad-v1', scratchpad.value);
+        });
+
+        /* --- ALIAS LOGIC --- */
+        let aliases = JSON.parse(localStorage.getItem('698498')) || {
+            'gemini': 'https://gemini.google.com',
+            'youtube': 'https://youtube.com',
+            'github': 'https://github.com',
+            '1337': 'https://1337x.to/',
+            'canvas': 'https://rutgers.instructure.com/',
+            'roblox': 'https://roblox.com',
+            'docs': 'https://docs.google.com/',
+            'webreg': 'https://sims.rutgers.edu/webreg/',
+            'mail': 'https://mail.google.com/mail/u/0/#inbox',
+            'mal': 'https://myanimelist.net/profile/noobo',
+            'reddit': 'https://www.reddit.com/'
+        };
+
+        const aliasList = document.getElementById('alias-list');
+        const aliasFilter = document.getElementById('alias-filter');
+
+        function renderAliases(filter = "") {
+            aliasList.innerHTML = '';
+            const f = filter.toLowerCase();
+            
+            Object.keys(aliases).forEach(key => {
+                const url = aliases[key];
+                if (key.includes(f) || url.toLowerCase().includes(f)) {
+                    const li = document.createElement('li');
+                    li.className = 'list-item';
+                    li.innerHTML = `
+                        <div class="alias-info">
+                            <span class="alias-tag">${key}</span><br>
+                            <a href="${url}" class="fav-link" target="_blank">${url.replace('https://', '').replace('www.', '')}</a>
+                        </div>
+                        <div class="controls">
+                            <span class="icon-btn" onclick="editAlias('${key}')">✏️</span>
+                            <span class="icon-btn delete-btn" onclick="deleteAlias('${key}')">&times;</span>
+                        </div>`;
+                    aliasList.appendChild(li);
+                }
+            });
+        }
+
+        aliasFilter.addEventListener('input', (e) => renderAliases(e.target.value));
+
+        const aliasKeyInput = document.getElementById('alias-key');
+        const aliasUrlInput = document.getElementById('alias-url');
+
+        function handleAliasSubmit(e) {
+            if (e.key === 'Enter') {
+                const key = aliasKeyInput.value.trim().toLowerCase();
+                let url = aliasUrlInput.value.trim();
+                if (key && url) {
+                    if (!url.startsWith('http')) url = 'https://' + url;
+                    aliases[key] = url; // Save URL directly to the key
+                    aliasKeyInput.value = ''; aliasUrlInput.value = '';
+                    saveAliases();
+                }
+            }
+        }
+
+        window.editAlias = (key) => {
+            aliasKeyInput.value = key; 
+            aliasUrlInput.value = aliases[key];
+            delete aliases[key]; 
+            saveAliases(); 
+            aliasKeyInput.focus();
+        };
+
+        window.deleteAlias = (key) => { delete aliases[key]; saveAliases(); };
+        function saveAliases() { 
+            localStorage.setItem(alias_name, JSON.stringify(aliases)); 
+            renderAliases(aliasFilter.value); 
+        }
+
+        aliasKeyInput.addEventListener("keydown", handleAliasSubmit);
+        aliasUrlInput.addEventListener("keydown", handleAliasSubmit);
+
+        /* --- SEARCH LOGIC --- */
+        const mainSearch = document.getElementById('main-search');
+        const searchForm = document.getElementById('search-form');
+        const searchPreview = document.getElementById('search-preview');
+        const previewText = document.getElementById('preview-text');
+        const previewLabel = document.getElementById('preview-label');
+
+        function getAutocompleteMatch(query) {
+            if (!query) return null;
+            const matchKey = Object.keys(aliases).find(key => key.startsWith(query));
+            if (matchKey) return { key: matchKey, url: aliases[matchKey] };
+            
+            const matchUrl = Object.values(aliases).find(url => url.includes(query));
+            if (matchUrl) return { key: null, url: matchUrl };
+            
+            return null;
+        }
+
+        mainSearch.addEventListener('input', () => {
+    const query = mainSearch.value.trim().toLowerCase();
+        if (!query) { searchPreview.style.display = 'none'; return; }
+        
+        searchPreview.style.display = 'block';
+        const autoMatch = getAutocompleteMatch(query);
+        const mathResult = solveMath(query);
+
+        if (query.startsWith('!')) {
+            previewLabel.innerText = "Force Search";
+            previewText.innerHTML = `<span style="color:var(--accent-purple)">"${query.slice(1).trim()}"</span>`;
+        } else if (mathResult !== null) {
+            previewLabel.innerText = "Calculator";
+            previewText.innerHTML = `<span style="color:var(--accent-blue)">= ${mathResult}</span>`;
+        } else if (aliases[query]) {
+            previewLabel.innerText = "Alias Match";
+            previewText.innerHTML = `<span style="color:var(--accent-blue)">${aliases[query]}</span>`;
+        } else if (autoMatch) {
+            previewLabel.innerText = "Autocomplete Match";
+            previewText.innerHTML = `<span style="color:var(--accent-blue)">${autoMatch.url}</span>`;
+        } else if (query.includes('.') && !query.includes(' ')) {
+            const url = query.startsWith('http') ? query : `https://${query}`;
+            previewLabel.innerText = "Direct URL";
+            previewText.innerHTML = `<span style="color:var(--accent-blue)">${url}</span>`;
+        } else {
+            previewLabel.innerText = "Search DuckDuckGo";
+            previewText.innerHTML = `<span style="color:var(--accent-purple)">"${query}"</span>`;
+        }
+    });
+
+        searchForm.addEventListener('submit', (e) => {
+            let query = mainSearch.value.trim().toLowerCase();
+            if (!query) { e.preventDefault(); return; }
+            if (query.startsWith('!')) {
+                e.preventDefault();
+                window.location.href = `https://duckduckgo.com/?q=${encodeURIComponent(query.slice(1).trim())}`;
+                return;
+            }
+            const autoMatch = getAutocompleteMatch(query);
+            if (aliases[query]) { e.preventDefault(); window.location.href = aliases[query]; } 
+            else if (autoMatch) { e.preventDefault(); window.location.href = autoMatch.url; }
+            else if (query.includes('.') && !query.includes(' ')) { e.preventDefault(); window.location.href = query.startsWith('http') ? query : `https://${query}`; }
+        });
+
+        renderAliases();
+    </script>
+</body>
+</html>
