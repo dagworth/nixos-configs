@@ -5,6 +5,8 @@
     ./home_modules/git.nix
     ./home_modules/vscode.nix
     ./home_modules/dotfiles.nix
+    ./home_modules/discord.nix
+    ./home_modules/spotify.nix
   ];
   # Always match this version to your NixOS/Home-Manager release
   home.stateVersion = "26.05";

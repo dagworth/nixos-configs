@@ -5,18 +5,14 @@
     enable = true;
     package = pkgs.vscode;
 
-    # Install extensions automatically from Nixpkgs
     profiles.default.extensions = with pkgs.vscode-extensions; [
-      bbenoist.nix          # Nix language support
-      ms-python.python    # Python support (uncomment if needed)
-      # eamodio.gitlens     # Git integration
+      bbenoist.nix
+      ms-python.python
     ];
 
-    # Directly manage VS Code's settings.json
     profiles.default.userSettings = {
-      "editor.fontSize" = 14;
-      "editor.tabSize" = 2;
-      "workbench.colorTheme" = "Default Dark Modern";
+      "editor.fontSize" = 16;
+      "editor.tabSize" = 4;
       "files.trimTrailingWhitespace" = true;
       "nix.enableLanguageServer" = true;
     };
