@@ -7,6 +7,8 @@
     ./home_modules/dotfiles.nix
     ./home_modules/discord.nix
     ./home_modules/spotify.nix
+    ./home_modules/burpsuite.nix
+    ./home_modules/qbittorrent.nix
   ];
   # Always match this version to your NixOS/Home-Manager release
   home.stateVersion = "26.05";
