@@ -23,6 +23,9 @@
     htop
     kitty
     brightnessctl
+    rofi-wayland
+    burpsuite
+    qbittorrent
   ];
 
   programs.quickshell.enable = true;
