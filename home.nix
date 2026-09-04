@@ -7,8 +7,7 @@
     ./home_modules/dotfiles.nix
     ./home_modules/discord.nix
     ./home_modules/spotify.nix
-    ./home_modules/burpsuite.nix
-    ./home_modules/qbittorrent.nix
+    ./home_modules/firefox.nix
   ];
   # Always match this version to your NixOS/Home-Manager release
   home.stateVersion = "26.05";
@@ -23,11 +22,10 @@
     htop
     kitty
     brightnessctl
-    rofi-wayland
+    rofi
     burpsuite
     qbittorrent
   ];
 
   programs.quickshell.enable = true;
-  programs.firefox.enable = true;
 }
