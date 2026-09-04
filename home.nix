@@ -6,7 +6,6 @@
     ./home_modules/vscode.nix
     ./home_modules/dotfiles.nix
     ./home_modules/discord.nix
-    ./home_modules/spotify.nix
     ./home_modules/firefox.nix
   ];
   # Always match this version to your NixOS/Home-Manager release
@@ -25,6 +24,7 @@
     rofi
     burpsuite
     qbittorrent
+    pkgs.spotify-spotx
   ];
 
   programs.quickshell.enable = true;
