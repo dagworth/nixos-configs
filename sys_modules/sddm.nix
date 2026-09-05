@@ -18,7 +18,7 @@ let
 
       FormPosition = "center";
       HaveFormBackground = "true";
-      # PartialBlur = "false";
+      PartialBlur = "false";
       FullBlur = "false";
 
       # catppuccin / quickshell-bar palette
@@ -29,8 +29,8 @@ let
       FormBackgroundColor = "#260c2930";
       BackgroundColor = "#0c2930";
 
-      LoginFieldBackgroundColor = "#2f5550";
-      PasswordFieldBackgroundColor = "#2f5550";
+      LoginFieldBackgroundColor = "#0c2930";
+      PasswordFieldBackgroundColor = "#0c2930";
       LoginFieldTextColor = "#cdd6f4";
       PasswordFieldTextColor = "#cdd6f4";
       UserIconColor = "#5daca2";
@@ -39,6 +39,7 @@ let
       PlaceholderTextColor = "#7c8a99";
       WarningColor = "#f38ba8";
 
+      HideLoginButton = "true";
       LoginButtonTextColor = "#cdd6f4";
       LoginButtonBackgroundColor = "#2f5550";
       SystemButtonsIconsColor = "#cdd6f4";
