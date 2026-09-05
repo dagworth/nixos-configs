@@ -8,7 +8,7 @@
     syntaxHighlighting.enable = true;
 
     initContent = ''
-      pokeget-rs random
+      pokeget random
     '';
   };
 
