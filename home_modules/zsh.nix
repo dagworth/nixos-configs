@@ -11,4 +11,9 @@
       pokeget-rs random
     '';
   };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }

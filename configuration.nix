@@ -71,10 +71,13 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
+
   users.users.larry = {
     isNormalUser = true;
     description = "larry";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
   hardware.bluetooth.enable = true;
