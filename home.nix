@@ -22,6 +22,7 @@
     kitty
     brightnessctl
     rofi
+    hyprpaper
     burpsuite
     qbittorrent
     pkgs.spotify-spotx
