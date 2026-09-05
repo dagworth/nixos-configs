@@ -26,6 +26,7 @@
     burpsuite
     qbittorrent
     pkgs.spotify-spotx
+    fastfetch
   ];
 
   programs.quickshell.enable = true;
