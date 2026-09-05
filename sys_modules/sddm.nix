@@ -18,13 +18,15 @@ let
 
       FormPosition = "center";
       HaveFormBackground = "true";
+      # PartialBlur = "false";
+      FullBlur = "false";
 
       # catppuccin / quickshell-bar palette
       HeaderTextColor = "#cdd6f4";
       DateTextColor = "#cdd6f4";
       TimeTextColor = "#cdd6f4";
 
-      FormBackgroundColor = "#0c2930";
+      FormBackgroundColor = "#260c2930";
       BackgroundColor = "#0c2930";
 
       LoginFieldBackgroundColor = "#2f5550";
