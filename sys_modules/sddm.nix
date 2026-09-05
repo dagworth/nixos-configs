@@ -29,8 +29,8 @@ let
       FormBackgroundColor = "#260c2930";
       BackgroundColor = "#0c2930";
 
-      LoginFieldBackgroundColor = "#0c2930";
-      PasswordFieldBackgroundColor = "#0c2930";
+      LoginFieldBackgroundColor = "#051318";
+      PasswordFieldBackgroundColor = "#051318";
       LoginFieldTextColor = "#cdd6f4";
       PasswordFieldTextColor = "#cdd6f4";
       UserIconColor = "#5daca2";
