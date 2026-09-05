@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./sys_modules/hyprland.nix
       ./sys_modules/overlays.nix
+      ./sys_modules/sddm.nix
       <home-manager/nixos>
     ];
 

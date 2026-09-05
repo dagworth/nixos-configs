@@ -25,6 +25,7 @@
     hyprpaper
     burpsuite
     qbittorrent
+    yazi
     pkgs.spotify-spotx
     fastfetch
   ];
