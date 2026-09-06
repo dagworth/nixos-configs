@@ -21,17 +21,11 @@ Rectangle {
         return "";
     }
 
-    function getColor() {
-        if (currentProfile === "performance") return "#f38ba8";
-        if (currentProfile === "power-saver") return "#a6e3a1";
-        return "#89b4fa";
-    }
-
     Text {
         anchors.centerIn: parent
         text: powerRoot.getIcon()
-        color: powerRoot.getColor()
-        font.pixelSize: 30
+        color: mainColor
+        font.pixelSize: 20
     }
 
     MouseArea {

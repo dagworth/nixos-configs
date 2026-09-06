@@ -21,17 +21,11 @@ Rectangle {
         return "󱩌";
     }
 
-    function getColor() {
-        if (brightness === 100) return "#f9e2af";
-        if (brightness === 50) return "#fab387";
-        return '#308bdb';
-    }
-
     Text {
         anchors.centerIn: parent
         text: brightnessRoot.getIcon()
-        color: brightnessRoot.getColor()
-        font.pixelSize: 30
+        color: mainColor
+        font.pixelSize: 20
     }
 
     MouseArea {

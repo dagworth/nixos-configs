@@ -21,7 +21,7 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        color: mainTextColor
+        color: active ? darkColor : mainColor
         font.pixelSize: showVolumeNumber ? buttonHeight*22/45 : buttonHeight*32/45
         font.bold: showVolumeNumber
         font.family: custom_font.name

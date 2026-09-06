@@ -31,7 +31,6 @@ Rectangle {
     function getIcon(win) {
         let name = win.wayland.appId
         let title = win.title
-        print(name)
         if (!name) return "";
         if (name.includes("kitty")) {
             if (title.includes("notes")) return "󰠮";

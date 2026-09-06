@@ -3,18 +3,18 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-ColumnLayout {
+Item {
     id: battery
 
     Layout.preferredHeight: buttonHeight*50/45
     Layout.preferredWidth: buttonHeight*40/45
 
-    Layout.alignment: Qt.AlignTop
-    Layout.topMargin: -buttonHeight*3/45
-
-    spacing: -28
+    Layout.alignment: Qt.AlignVCenter
 
     property string currentBat: "100"
+    property real numberOffsetX: 0
+    property real numberOffsetY: buttonHeight*50/45*0.18
+    property real iconOffsetY: -buttonHeight*0.06
 
     FileView {
         id: batteryFile
@@ -23,6 +23,8 @@ ColumnLayout {
 
     Text {
         id: batteryIcon
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: battery.iconOffsetY
         text: "󰂀"
         color: {
             if(battery.currentBat >= 20) {
@@ -37,7 +39,9 @@ ColumnLayout {
 
     Text {
         id: batteryNumber
-        Layout.leftMargin: (batteryIcon.contentWidth - batteryNumber.contentWidth) / 2
+        anchors.centerIn: batteryIcon
+        anchors.horizontalCenterOffset: battery.numberOffsetX
+        anchors.verticalCenterOffset: battery.numberOffsetY
         text: {
             if(battery.currentBat == 100) {
                 return "󰋑"

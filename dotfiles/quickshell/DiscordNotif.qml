@@ -11,10 +11,14 @@ Rectangle {
     clip: true
     opacity: hasNotif ? 1.0 : 0.0
 
+    property bool suppressResizeAnim: false
+
     Behavior on width {
+        enabled: !root.suppressResizeAnim
         NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
     }
     Behavior on opacity {
+        enabled: !root.suppressResizeAnim
         NumberAnimation { duration: hasNotif ? 250 : 150; easing.type: Easing.OutCubic }
     }
 
@@ -26,6 +30,26 @@ Rectangle {
     property string notifBody: ""
     property string notifChannel: ""
     property bool hasNotif: notifSender !== ""
+
+    function dismiss() {
+        notifSender  = ""
+        notifBody    = ""
+        notifChannel = ""
+    }
+
+    SequentialAnimation {
+        id: dismissAnim
+        NumberAnimation { target: root; property: "scale"; to: 1.05; duration: 60; easing.type: Easing.OutQuad }
+        NumberAnimation { target: root; property: "scale"; to: 0.0; duration: 130; easing.type: Easing.InCubic }
+        ScriptAction {
+            script: {
+                root.suppressResizeAnim = true
+                root.dismiss()
+                root.scale = 1.0
+                root.suppressResizeAnim = false
+            }
+        }
+    }
 
     Connections {
         target: root.server
@@ -64,11 +88,7 @@ Rectangle {
     Timer {
         id: clearTimer
         interval: 30000
-        onTriggered: {
-            notifSender  = ""
-            notifBody    = ""
-            notifChannel = ""
-        }
+        onTriggered: root.dismiss()
     }
 
     RowLayout {
@@ -106,9 +126,7 @@ Rectangle {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            notifSender  = ""
-            notifBody    = ""
-            notifChannel = ""
+            if (!dismissAnim.running) dismissAnim.start()
         }
     }
 }

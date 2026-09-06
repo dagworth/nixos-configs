@@ -27,7 +27,7 @@ Rectangle {
                 return ":("
             }
         }
-        color: mainTextColor
+        color: active ? darkColor : mainColor
         font.family: custom_font.name
         font.pixelSize: buttonHeight*32/45
     }

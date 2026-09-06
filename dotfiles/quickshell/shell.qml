@@ -99,6 +99,7 @@ PanelWindow {
                     spacing: bubbleHeight/4.5
                     //CPUTemp {}
                     Item { Layout.fillWidth: true }
+                    ThemeSwitcher {}
                     Sound {}
                     Brightness {}
                     PowerProfile {}
