@@ -6,11 +6,17 @@ import Quickshell.Services.Notifications
 Rectangle {
     color: backgroundColor
     radius: bubbleRadius
-    Layout.alignment: Qt.AlignTop
     height: bubbleHeight
-    Layout.topMargin: bubbleTopMargin
-    width: screen.width * .125
+    width: hasNotif ? screen.width * .125 : 0
     clip: true
+    opacity: hasNotif ? 1.0 : 0.0
+
+    Behavior on width {
+        NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
+    }
+    Behavior on opacity {
+        NumberAnimation { duration: hasNotif ? 250 : 150; easing.type: Easing.OutCubic }
+    }
 
     id: root
 
@@ -19,7 +25,6 @@ Rectangle {
     property string notifSender: ""
     property string notifBody: ""
     property string notifChannel: ""
-    property string notifTime: ""
     property bool hasNotif: notifSender !== ""
 
     Connections {
@@ -39,7 +44,6 @@ Rectangle {
                 notifChannel = ""
             }
             notifBody = body
-            notifTime = Qt.formatTime(new Date(), "hh:mm")
 
             clearTimer.restart()
         }
@@ -53,7 +57,7 @@ Rectangle {
     Rectangle {
         anchors.fill: parent
         radius: bubbleRadius
-        color: "#5865F2"
+        color: backgroundColor
         opacity: parent.fillOpacity
     }
 
@@ -64,7 +68,6 @@ Rectangle {
             notifSender  = ""
             notifBody    = ""
             notifChannel = ""
-            notifTime    = ""
         }
     }
 
@@ -79,21 +82,17 @@ Rectangle {
             Layout.fillWidth: true
 
             Text {
-                text: hasNotif
-                    ? (notifSender + (notifChannel !== "" ? " — " + notifChannel : ""))
-                    : "discord"
-                color: hasNotif ? mainTextColor : fadedTextColor
+                text: notifSender + (notifChannel !== "" ? " — " + notifChannel : "")
+                color: mainTextColor
                 font.family: custom_font.name
                 font.pixelSize: bubbleHeight * 17/60
                 font.bold: true
                 elide: Text.ElideRight
                 Layout.fillWidth: true
-
-                Behavior on color { ColorAnimation { duration: 200 } }
             }
 
             Text {
-                text: hasNotif ? notifBody : "no notifications"
+                text: notifBody
                 color: fadedTextColor
                 font.family: custom_font.name
                 font.pixelSize: bubbleHeight * 13/60
@@ -101,35 +100,15 @@ Rectangle {
                 Layout.fillWidth: true
             }
         }
+    }
 
-        ColumnLayout {
-            spacing: 4
-            Layout.alignment: Qt.AlignVCenter
-
-            Text {
-                text: notifTime
-                color: fadedTextColor
-                font.family: custom_font.name
-                font.pixelSize: bubbleHeight * 11/60
-                visible: hasNotif
-            }
-
-            Text {
-                text: "✕"
-                color: fadedTextColor
-                font.pixelSize: bubbleHeight * 14/60
-                visible: hasNotif
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        notifSender  = ""
-                        notifBody    = ""
-                        notifChannel = ""
-                        notifTime    = ""
-                    }
-                }
-            }
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            notifSender  = ""
+            notifBody    = ""
+            notifChannel = ""
         }
     }
 }

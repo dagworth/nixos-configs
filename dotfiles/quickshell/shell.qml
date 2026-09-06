@@ -57,7 +57,15 @@ PanelWindow {
         }
 
         WeatherTime {
+            id: weatherTime
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: bubbleTopMargin
+        }
+
+        DiscordNotif {
+            anchors.left: weatherTime.right
+            anchors.leftMargin: bubbleHeight*.33
             anchors.top: parent.top
             anchors.topMargin: bubbleTopMargin
         }
@@ -73,8 +81,6 @@ PanelWindow {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             spacing: bubbleHeight*.55
-
-            DiscordNotif {}
 
             Rectangle {
                 anchors.right: parent.right

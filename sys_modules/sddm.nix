@@ -6,6 +6,7 @@ let
   astronautTheme = pkgs.sddm-astronaut.override {
     embeddedTheme = "astronaut";
     themeConfig = {
+      Background = "/etc/sddm/backgrounds/greeter.jpg";
       DimBackground = "0.35";
       DimBackgroundColor = "#0c2930";
       CropBackground = "true";
@@ -58,7 +59,7 @@ let
   };
 in
 {
-  environment.etc."sddm/backgrounds/catpuccin.jpg".source = background;
+  environment.etc."sddm/backgrounds/greeter.jpg".source = background;
 
   environment.systemPackages = [ astronautTheme ];
 
