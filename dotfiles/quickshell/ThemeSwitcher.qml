@@ -29,13 +29,13 @@ Rectangle {
             wallpaper: Quickshell.env("HOME") + "/.config/hypr/main.jpg"
         },
         {
-            name: "Latte",
-            backgroundColor: "#99eff1f5",
-            mainTextColor: "#4c4f69",
-            fadedTextColor: "#9c6c6f85",
+            name: "purple",
+            backgroundColor: '#99242424',
+            mainTextColor: '#cecece',
+            fadedTextColor: '#9c9195b1',
             mainColor: '#991799',
-            secondaryColor: "#acb0be",
-            darkColor: "#eff1f5",
+            secondaryColor: '#4c054c',
+            darkColor: '#0c2930',
             wallpaper: Quickshell.env("HOME") + "/.config/hypr/secondary.jpg"
         }
     ]
