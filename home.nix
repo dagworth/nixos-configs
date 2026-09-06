@@ -7,7 +7,6 @@
     ./home_modules/dotfiles.nix
     ./home_modules/discord.nix
     ./home_modules/firefox.nix
-    ./home_modules/zsh.nix
   ];
   # Always match this version to your NixOS/Home-Manager release
   home.stateVersion = "26.05";
@@ -33,6 +32,7 @@
     mpv
     micro
     pokeget-rs
+    pulseaudio
   ];
 
   home.pointerCursor = {

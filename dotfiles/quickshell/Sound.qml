@@ -14,6 +14,7 @@ Rectangle {
     Layout.topMargin: buttonTopMargin
 
     property int volume: 0
+    property bool muted: false
     property bool active: false
     property int startvolume: 0
     property bool showVolumeNumber: false
@@ -27,6 +28,7 @@ Rectangle {
 
         text: {
             if (showVolumeNumber) return volume
+            if (muted) return "󰝟"
             if (volume == 0)  return "󰕿"
             else if (volume < 35)  return "󰖀"
             return "󰕾"
@@ -72,8 +74,10 @@ Rectangle {
         
         stdout: SplitParser {
             onRead: (line) => {
-                let val = parseInt(line);
+                let parts = line.trim().split(/\s+/);
+                let val = parseInt(parts[0]);
                 if (!isNaN(val)) volume = val;
+                if (parts.length > 1) muted = parts[1] === "1";
             }
         }
     }
@@ -85,20 +89,27 @@ Rectangle {
 
         stdout: SplitParser {
             onRead: (line) => {
-                let val = parseInt(line);
-                if (!isNaN(val)) {
-                    volume = val;
-                    showVolumeNumber = true;
-                    volumeNumberTimer.restart();
-                }
+                let parts = line.trim().split(/\s+/);
+                let val = parseInt(parts[0]);
+                if (!isNaN(val)) volume = val;
+                if (parts.length > 1) muted = parts[1] === "1";
             }
         }
     }
 
     Timer {
         id: volumeNumberTimer
-        interval: 400
+        interval: 1000
         onTriggered: showVolumeNumber = false
+    }
+
+    IpcHandler {
+        target: "sound"
+
+        function flash(): void {
+            showVolumeNumber = true;
+            volumeNumberTimer.restart();
+        }
     }
 
     PopupWindow {

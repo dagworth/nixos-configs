@@ -11,6 +11,7 @@
       ./sys_modules/hyprland.nix
       ./sys_modules/overlays.nix
       ./sys_modules/sddm.nix
+      ./sys_modules/shell.nix
       <home-manager/nixos>
     ];
 
@@ -69,15 +70,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
-
-  programs.zsh.enable = true;
 
   users.users.larry = {
     isNormalUser = true;
     description = "larry";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
   };
 
   hardware.bluetooth.enable = true;
@@ -86,6 +85,10 @@
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "26.05";
+
+  environment.systemPackages = [
+    pkgs.claude-code
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

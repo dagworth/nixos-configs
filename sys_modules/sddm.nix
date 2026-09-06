@@ -1,13 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  # Reuses the same wallpaper as hyprpaper so the login screen matches the desktop.
-  background = ../dotfiles/greeter.png;
+  background = ../dotfiles/greeter.jpg;
 
   astronautTheme = pkgs.sddm-astronaut.override {
     embeddedTheme = "astronaut";
     themeConfig = {
-      Background = "/etc/sddm/backgrounds/catpuccin.jpg";
       DimBackground = "0.35";
       DimBackgroundColor = "#0c2930";
       CropBackground = "true";
@@ -21,7 +19,6 @@ let
       PartialBlur = "false";
       FullBlur = "false";
 
-      # catppuccin / quickshell-bar palette
       HeaderTextColor = "#cdd6f4";
       DateTextColor = "#cdd6f4";
       TimeTextColor = "#cdd6f4";
