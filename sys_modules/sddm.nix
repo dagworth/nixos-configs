@@ -11,7 +11,7 @@ let
       DimBackgroundColor = "#0c2930";
       CropBackground = "true";
 
-      Font = "JetBrainsMono Nerd Font";
+      Font = "Maple Mono NF";
       HourFormat = "h:mm AP";
       DateFormat = "dddd, MMMM d";
 

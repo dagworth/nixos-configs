@@ -25,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         text: brightnessRoot.getIcon()
         color: mainColor
-        font.pixelSize: 20
+        font.pixelSize: buttonHeight*32/45
     }
 
     MouseArea {

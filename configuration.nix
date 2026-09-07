@@ -54,7 +54,7 @@
   services.power-profiles-daemon.enable = true;
 
   fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
+    maple-mono.NF
     nerd-fonts.fira-code
   ];
 
