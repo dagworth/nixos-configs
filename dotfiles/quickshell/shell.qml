@@ -27,7 +27,7 @@ PanelWindow {
     anchors.top: true
     anchors.left: true
     anchors.right: true
-    
+
     implicitHeight: screen.height * .05
     color: "transparent"
 
@@ -48,7 +48,7 @@ PanelWindow {
 
         RowLayout {
             anchors.left: parent.left
-            anchors.top: parent.top 
+            anchors.top: parent.top
             anchors.bottom: parent.bottom
             spacing: bubbleHeight*.33
 
@@ -92,7 +92,7 @@ PanelWindow {
 
                 height: bubbleHeight
                 width: row.implicitWidth
-                
+
                 RowLayout {
                     id: row
                     anchors.fill: parent

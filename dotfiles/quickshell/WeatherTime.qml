@@ -15,19 +15,19 @@ Rectangle {
     property bool isDaytime: true
     function getWeatherIcon(condition, isDay) {
         let cond = condition.toLowerCase();
-        if (cond.includes("sunny") || cond.includes("clear")) 
+        if (cond.includes("sunny") || cond.includes("clear"))
             return isDay ? "󰖙" : "󰖔";
-        if (cond.includes("partly")) 
+        if (cond.includes("partly"))
             return isDay ? "󰖕" : "󰼱";
-        if (cond.includes("cloud") || cond.includes("overcast")) 
+        if (cond.includes("cloud") || cond.includes("overcast"))
             return "󰖐";
-        if (cond.includes("rain") || cond.includes("drizzle") || cond.includes("shower")) 
+        if (cond.includes("rain") || cond.includes("drizzle") || cond.includes("shower"))
             return "";
-        if (cond.includes("thunder") || cond.includes("storm")) 
+        if (cond.includes("thunder") || cond.includes("storm"))
             return "󰖓";
-        if (cond.includes("snow") || cond.includes("ice") || cond.includes("blizzard")) 
+        if (cond.includes("snow") || cond.includes("ice") || cond.includes("blizzard"))
             return "󰖘";
-        if (cond.includes("fog") || cond.includes("mist")) 
+        if (cond.includes("fog") || cond.includes("mist"))
             return "󰖑";
         return isDay ? "󰖙" : "󰖔";
     }
@@ -88,7 +88,7 @@ Rectangle {
         repeat: true
         onTriggered: {
             let d = new Date();
-            timeText.text = d.toLocaleTimeString(Qt.locale(), "h:mm:ss AP"); 
+            timeText.text = d.toLocaleTimeString(Qt.locale(), "h:mm:ss AP");
             dateText.text = d.toLocaleDateString(Qt.locale(), "dddd, MMMM d");
 
             let currentHour = d.getHours();
@@ -101,11 +101,11 @@ Rectangle {
         id: weatherFetcher
         property string temp: "........."
         property string condition: "unknown"
-        
-        running: true 
+
+        running: true
 
         command: [Quickshell.shellPath("scripts/weather.sh")]
-        
+
         stdout: SplitParser {
             onRead: (line) => {
                 let cleanLine = line.trim();

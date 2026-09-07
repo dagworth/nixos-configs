@@ -8,6 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./sys_modules/distrobox.nix
       ./sys_modules/hyprland.nix
       ./sys_modules/overlays.nix
       ./sys_modules/sddm.nix
@@ -76,7 +77,7 @@
   users.users.larry = {
     isNormalUser = true;
     description = "larry";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   hardware.bluetooth.enable = true;
