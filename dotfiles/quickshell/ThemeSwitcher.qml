@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 
 Rectangle {
     id: themeButton
@@ -13,7 +14,17 @@ Rectangle {
     Layout.alignment: Qt.AlignTop
     Layout.topMargin: buttonTopMargin
 
-    property bool popupOpen: false
+    property bool popupOpen: rootBar.openPopupId === "theme"
+
+    onPopupOpenChanged: focusGrab.active = popupOpen
+
+    HyprlandFocusGrab {
+        id: focusGrab
+        windows: [rootBar, popup]
+        onCleared: {
+            if (rootBar.openPopupId === "theme") rootBar.openPopupId = ""
+        }
+    }
     property string currentTheme: "main"
     property string currentWallpaper: ""
 
@@ -74,7 +85,7 @@ Rectangle {
             themeFile.setText(theme.name)
         }
 
-        popupOpen = false
+        rootBar.openPopupId = ""
     }
 
     Process {
@@ -103,7 +114,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: themeButton.popupOpen = !themeButton.popupOpen
+        onClicked: rootBar.openPopupId = themeButton.popupOpen ? "" : "theme"
     }
 
     PopupWindow {

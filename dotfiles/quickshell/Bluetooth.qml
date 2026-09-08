@@ -15,8 +15,18 @@ Rectangle {
     Layout.alignment: Qt.AlignTop
     Layout.topMargin: buttonTopMargin
 
-    property bool active: false
+    property bool active: rootBar.openPopupId === "bluetooth"
     property bool discover_view: false
+
+    onActiveChanged: focusGrab.active = active
+
+    HyprlandFocusGrab {
+        id: focusGrab
+        windows: [rootBar, popup]
+        onCleared: {
+            if (rootBar.openPopupId === "bluetooth") rootBar.openPopupId = ""
+        }
+    }
 
     Text {
         anchors.centerIn: parent
@@ -36,7 +46,7 @@ Rectangle {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            active = !active
+            rootBar.openPopupId = active ? "" : "bluetooth"
         }
     }
 

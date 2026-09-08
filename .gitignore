@@ -1,0 +1,4 @@
+sys_modules/wifi-secrets.nix
+sys_modules/wifi.nix
+sys_modules/touchpad.nix
+.vscode

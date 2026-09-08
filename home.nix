@@ -18,6 +18,7 @@
 
   # User-specific packages that don't need root installation
   home.packages = with pkgs; [
+    btop
     htop
     kitty
     brightnessctl

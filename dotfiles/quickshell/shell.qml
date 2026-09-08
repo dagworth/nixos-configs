@@ -24,6 +24,8 @@ PanelWindow {
     property int buttonRadius: buttonHeight*10/45
     property int buttonTopMargin: buttonHeight*8/45
 
+    property string openPopupId: ""
+
     anchors.top: true
     anchors.left: true
     anchors.right: true
@@ -99,10 +101,11 @@ PanelWindow {
                     spacing: bubbleHeight/4.5
                     //CPUTemp {}
                     Item { Layout.fillWidth: true }
-                    ThemeSwitcher {}
+                    // ThemeSwitcher {}
                     Sound {}
                     Brightness {}
                     PowerProfile {}
+                    Wifi {}
                     Bluetooth {}
                     Battery {}
                 }

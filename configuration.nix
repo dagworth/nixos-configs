@@ -13,6 +13,8 @@
       ./sys_modules/overlays.nix
       ./sys_modules/sddm.nix
       ./sys_modules/shell.nix
+      ./sys_modules/wifi.nix
+      ./sys_modules/touchpad.nix
       <home-manager/nixos>
     ];
 

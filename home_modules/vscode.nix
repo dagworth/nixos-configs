@@ -12,6 +12,7 @@
     ];
 
     profiles.default.userSettings = {
+      "editor.fontFamily" = "'Maple Mono NF', 'monospace', monospace";
       "editor.fontSize" = 16;
       "editor.tabSize" = 4;
       "files.trimTrailingWhitespace" = true;
@@ -23,6 +24,7 @@
       "workbench.tree.indent" = 16;
       "workbench.tree.renderIndentGuides" = "always";
       "workbench.activityBar.location" = "bottom";
+      "chat.disableAIFeatures" = true;
     };
   };
 }
