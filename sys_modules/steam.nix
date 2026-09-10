@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-	programs.discord = {
+	programs.steam = {
 		enable = true;
 	};
 }

@@ -85,10 +85,9 @@ PanelWindow {
             spacing: bubbleHeight*.55
 
             Rectangle {
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.topMargin: bubbleTopMargin
-                anchors.rightMargin: bubbleTopMargin
+                Layout.alignment: Qt.AlignRight | Qt.AlignTop
+                Layout.topMargin: bubbleTopMargin
+                Layout.rightMargin: bubbleTopMargin
                 color: backgroundColor
                 radius: bubbleRadius
 

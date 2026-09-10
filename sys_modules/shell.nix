@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  programs.bash = {
-    enable = true;
-  };
+	programs.bash = {
+		enable = true;
+	};
 
-  programs.starship = {
-    enable = true;
-  };
+	programs.starship = {
+		enable = true;
+	};
 }

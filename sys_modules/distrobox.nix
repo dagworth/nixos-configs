@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  virtualisation.docker.enable = true;
+	virtualisation.docker.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    distrobox
-    docker
-  ];
+	environment.systemPackages = with pkgs; [
+		distrobox
+		docker
+	];
 }

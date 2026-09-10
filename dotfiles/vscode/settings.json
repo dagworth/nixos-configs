@@ -1,0 +1,15 @@
+{
+	//Maple Mono NF
+	"editor.fontFamily": "'Atkinson Hyperlegible', monospace",
+	"editor.fontSize": 16,
+	"terminal.integrated.fontFamily": "'Maple Mono NF'",
+	"editor.tabSize": 6,
+	"editor.insertSpaces": false,
+	"files.trimTrailingWhitespace": true,
+	"workbench.iconTheme": "vscode-icons",
+	"workbench.colorTheme": "Dracula Theme",
+	"workbench.tree.indent": 14,
+	"workbench.tree.renderIndentGuides": "always",
+	"workbench.activityBar.location": "bottom",
+	"chat.disableAIFeatures": true
+}

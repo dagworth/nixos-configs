@@ -29,7 +29,7 @@ Rectangle {
     ]
 
     function getIcon(win) {
-        let name = win.wayland.appId
+        let name = win.wayland ? win.wayland.appId : ""
         let title = win.title
         if (!name) return "";
         if (name.includes("kitty")) {
@@ -44,7 +44,7 @@ Rectangle {
     }
 
     function getIconPriority(win) {
-        let name = win.wayland.appId
+        let name = win.wayland ? win.wayland.appId : ""
         if (!name) return iconPriority.length;
         for (let i = 0; i < iconPriority.length; i++) {
             if (name.includes(iconPriority[i].name)) return i;

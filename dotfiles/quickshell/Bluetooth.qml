@@ -17,6 +17,26 @@ Rectangle {
 
     property bool active: rootBar.openPopupId === "bluetooth"
     property bool discover_view: false
+    property string searchText: ""
+
+    property var filteredDevices: {
+        if (!Bluetooth.defaultAdapter) return [];
+        var query = searchText.toLowerCase();
+        var all = Bluetooth.defaultAdapter.devices.values;
+        var result = [];
+        for (var i = 0; i < all.length; i++) {
+            var d = all[i];
+            var matchesTab = discover_view ? !d.paired : d.paired;
+            if (!matchesTab) continue;
+            if (query !== "") {
+                var name = d.name ? d.name.toLowerCase() : "";
+                var address = d.address ? d.address.toLowerCase() : "";
+                if (name.indexOf(query) === -1 && address.indexOf(query) === -1) continue;
+            }
+            result.push(d);
+        }
+        return result;
+    }
 
     onActiveChanged: focusGrab.active = active
 
@@ -99,10 +119,10 @@ Rectangle {
                         Layout.preferredHeight: 24
                         color: mainColor
                         radius: 12
-                        
+
                         Text {
                             anchors.centerIn: parent
-                            text: Bluetooth.defaultAdapter.enabled ? "On" : "Off"
+                            text: (Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled) ? "On" : "Off"
                             color: mainTextColor
                             font.pixelSize: 11
                         }
@@ -121,7 +141,7 @@ Rectangle {
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: 10
-                    visible: Bluetooth.defaultAdapter.enabled
+                    visible: Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled
 
                     //paired
                     Rectangle {
@@ -170,6 +190,36 @@ Rectangle {
                     }
                 }
 
+                // search bar
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 30
+                    color: backgroundColor
+                    radius: 6
+                    visible: Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 8
+                        text: "search devices"
+                        color: fadedTextColor
+                        font.pixelSize: 13
+                        visible: searchInput.text.length === 0
+                    }
+
+                    TextInput {
+                        id: searchInput
+                        anchors.fill: parent
+                        anchors.margins: 6
+                        color: mainTextColor
+                        font.pixelSize: 13
+                        clip: true
+
+                        onTextChanged: bluetoothButton.searchText = text
+                    }
+                }
+
                 // device list
                 ListView {
                     id: deviceListView
@@ -178,24 +228,20 @@ Rectangle {
                     clip: true
                     spacing: 5
 
-                    visible: Bluetooth.defaultAdapter.enabled
+                    visible: Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled
 
-                    model: Bluetooth.defaultAdapter.devices
+                    model: bluetoothButton.filteredDevices
 
                     delegate: Rectangle {
                         width: deviceListView.width
-                        property bool show: bluetoothButton.discover_view ? !modelData.paired : modelData.paired
-                        
-                        height: show ? 45 : 0
-                        visible: show
-                        
+                        height: 45
+
                         color: backgroundColor
                         radius: 6
 
                         RowLayout {
                             anchors.fill: parent
-                            anchors.margins: show ? 10 : 0
-                            visible: show
+                            anchors.margins: 10
 
                             ColumnLayout {
                                 Layout.fillWidth: true
@@ -241,19 +287,19 @@ Rectangle {
                         }
                     }
                 }
-                
+
                 //fallback if bluetooth is off
                 Text {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    
+
                     visible: !Bluetooth.defaultAdapter || !Bluetooth.defaultAdapter.enabled
-                    
+
                     text: "bluetooth is off"
-                    color: fadedTextColor 
+                    color: fadedTextColor
                     font.family: custom_font.name
                     font.pixelSize: 30
-                    
+
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }

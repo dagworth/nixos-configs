@@ -2,16 +2,17 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
+	inherit (config.lib.file) mkOutOfStoreSymlink;
 in
 {
-  xdg.configFile = {
-    "hypr".source = mkOutOfStoreSymlink ../dotfiles/hypr;
-    "quickshell".source = mkOutOfStoreSymlink ../dotfiles/quickshell;
-    "kitty".source = mkOutOfStoreSymlink ../dotfiles/kitty;
-  };
+	xdg.configFile = {
+		"hypr".source = mkOutOfStoreSymlink ../dotfiles/hypr;
+		"quickshell".source = mkOutOfStoreSymlink ../dotfiles/quickshell;
+		"kitty".source = mkOutOfStoreSymlink ../dotfiles/kitty;
+		"Code/User/settings.json".source = ../dotfiles/vscode/settings.json;
+	};
 
-  home.file = {
-    ".bashrc".source = mkOutOfStoreSymlink ../dotfiles/.bashrc;
-  };
+	home.file = {
+		".bashrc".source = mkOutOfStoreSymlink ../dotfiles/.bashrc;
+	};
 }
