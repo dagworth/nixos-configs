@@ -17,7 +17,7 @@ Rectangle {
     property var iconPriority: [
         { name: "burp-StartBurp", icon: "󰀂" },
         { name: "discord", icon: "󰙯" },
-        { name: "Spotify", icon: "󰓇" },
+        { name: "spotify", icon: "󰓇" },
         { name: "godotengine", icon: "" },
         { name: "steam", icon: "" },
         { name: "qbittorrent", icon: "󰨈" },
@@ -35,7 +35,6 @@ Rectangle {
         if (name.includes("kitty")) {
             if (title.includes("notes")) return "󰠮";
             if (title.includes("Yazi")) return "";
-            return "󰞷";
         }
         for (let i = 0; i < iconPriority.length; i++) {
             if (name.includes(iconPriority[i].name)) return iconPriority[i].icon;

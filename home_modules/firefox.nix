@@ -10,7 +10,7 @@
 			settings = {
 				"toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 				"font.default.x-western" = "sans-serif";
-				"font.name.sans-serif.x-western" = "sans-serif";
+				"font.name.sans-serif.x-western" = "Atkinson Hyperlegible";
 				"font.size.variable.x-western" = 15;
 			};
 		};
