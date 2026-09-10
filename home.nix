@@ -36,6 +36,7 @@
 		pulseaudio
 		inkscape
 		unzip
+		godot_4-mono
 		grim
 		slurp
 		wl-clipboard

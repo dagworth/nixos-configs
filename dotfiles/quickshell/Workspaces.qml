@@ -18,7 +18,7 @@ Rectangle {
         { name: "burp-StartBurp", icon: "󰀂" },
         { name: "discord", icon: "󰙯" },
         { name: "spotify", icon: "󰓇" },
-        { name: "godotengine", icon: "" },
+        { name: "Godot", icon: "" },
         { name: "steam", icon: "" },
         { name: "qbittorrent", icon: "󰨈" },
         { name: "code-oss", icon: "󰨞" },
@@ -31,6 +31,7 @@ Rectangle {
     function getIcon(win) {
         let name = win.wayland ? win.wayland.appId : ""
         let title = win.title
+        // print(name)
         if (!name) return "";
         if (name.includes("kitty")) {
             if (title.includes("notes")) return "󰠮";
