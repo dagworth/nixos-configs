@@ -285,6 +285,13 @@ Rectangle {
                                 }
                             }
                         }
+
+                        Connections {
+                            target: modelData
+                            function onPairedChanged() {
+                                if (modelData.paired) modelData.trusted = true;
+                            }
+                        }
                     }
                 }
 

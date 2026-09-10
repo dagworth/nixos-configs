@@ -2,8 +2,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("quickshell")
   hl.exec_cmd("firefox")
-  -- hl.exec_cmd("spotify", { workspace = "0 silent"})
-  -- hl.exec_cmd("discord", { workspace = "9 silent"})
+  hl.exec_cmd("spotify")
+  hl.exec_cmd("discord")
 end)
 
 -- swaync and yazi

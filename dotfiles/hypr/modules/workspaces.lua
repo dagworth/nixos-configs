@@ -55,6 +55,12 @@ hl.window_rule({
 -- })
 -- overlayLayerRule:set_enabled(false)
 
+hl.layer_rule({
+    name  = "no-anim-rofi",
+    match = { namespace = "^rofi$" },
+    no_anim = true,
+})
+
 -- Hyprland-run windowrule
 hl.window_rule({
     name  = "move-hyprland-run",
@@ -62,4 +68,20 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+-- Pin Discord/Spotify to fixed workspaces so their launcher-spawned
+-- instance doesn't dump a new window onto whatever workspace is active.
+hl.window_rule({
+    name  = "discord-workspace",
+    match = { class = "^discord$" },
+
+    workspace = "10 silent",
+})
+
+hl.window_rule({
+    name  = "spotify-workspace",
+    match = { class = "^spotify$" },
+
+    workspace = "9 silent",
 })

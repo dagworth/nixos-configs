@@ -1,0 +1,103 @@
+/*
+ * backgroundColor #99343434, mainTextColor #cdd6f4, mainColor #5daca2,
+ * secondaryColor #2f5550, darkColor #0c2930.
+ */
+
+configuration {
+    modi:               "drun,run,window";
+    show-icons:          true;
+    icon-theme:          "Papirus";
+    display-drun:        ">";
+    display-run:         ">";
+    display-window:      ">";
+    drun-display-format: "{name}";
+    font:                "Maple Mono NF 11";
+}
+
+* {
+    background-color:  transparent;
+    text-color:         @main-text;
+
+    main-bg:            #2b2b2bcc;
+    main-text:          #cdd6f4;
+    faded-text:          #9ca6adc8;
+    accent:              #5daca2;
+    dark:                #0c2930;
+    button-bg:            #16302bcc;
+    select-bg:            #3d3d3dcc;
+
+    border-radius:       12px;
+}
+
+window {
+    background-color: @main-bg;
+    border:            2px;
+    border-color:      @accent;
+    border-radius:      @border-radius;
+    width:              32%;
+    location:           center;
+    padding:            14px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing:            10px;
+    children:           [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: @select-bg;
+    text-color:         @main-text;
+    border-radius:      8px;
+    padding:            10px 12px;
+    spacing:             8px;
+    children:            [ "prompt", "entry" ];
+}
+
+prompt {
+    text-color: @accent;
+}
+
+entry {
+    text-color:          @main-text;
+    placeholder:         "";
+    placeholder-color:   @faded-text;
+    cursor-color:        @accent;
+    cursor-width:        9px;
+    border-radius:       0;
+    hide-cursor-on-empty: false;
+    blink:                true;
+}
+
+listview {
+    background-color: transparent;
+    lines:              8;
+    spacing:            4px;
+    scrollbar:           false;
+    fixed-height:        false;
+}
+
+element {
+    border-radius:      8px;
+    padding:            8px 10px;
+    spacing:             10px;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: @select-bg;
+    text-color:         @accent;
+}
+
+element selected.normal {
+    background-color: @button-bg;
+    text-color:         @main-text;
+}
+
+element-icon {
+    size:      1.4em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
