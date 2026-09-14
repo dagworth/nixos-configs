@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 while true; do
     curl -s 'wttr.in/?format=%C|%t' | tr -d '+'
     echo

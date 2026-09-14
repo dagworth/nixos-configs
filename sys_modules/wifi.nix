@@ -22,7 +22,7 @@ in
 			phase2-auth = "pap";
 			identity = wifi.identity;
 			password = wifi.password;
-			ca-cert = wifi.cert;
+			ca-cert = "${./cert.pem}";
 			domain-suffix-match = wifi.domain;
 		};
 		ipv4.method = "auto";

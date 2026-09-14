@@ -10,7 +10,6 @@
 	];
 	# Always match this version to your NixOS/Home-Manager release
 	home.stateVersion = "26.05";
-
 	# Let Home Manager manage itself
 	programs.home-manager.enable = true;
 	home.username = "larry";

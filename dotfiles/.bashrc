@@ -5,5 +5,5 @@ else
     pokeget random
 fi
 
-alias rb='sudo nixos-rebuild switch'
+alias rb='sudo nixos-rebuild switch -I nixos-config=/home/larry/.config/nixos/configuration.nix'
 alias nc='cd ~/.config/nixos'
