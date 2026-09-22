@@ -12,6 +12,7 @@
 				"font.default.x-western" = "sans-serif";
 				"font.name.sans-serif.x-western" = "Atkinson Hyperlegible";
 				"font.size.variable.x-western" = 15;
+				"xpinstall.signatures.required" = false;
 			};
 		};
 	};

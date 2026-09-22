@@ -36,6 +36,7 @@
 		inkscape
 		unzip
 		godot_4-mono
+		qtcreator
 		grim
 		slurp
 		wl-clipboard
@@ -46,6 +47,10 @@
 		package = pkgs.bibata-cursors;
 		size = 24;
 		gtk.enable = true;
+	};
+
+	home.sessionVariables = {
+		XDG_DATA_DIRS = "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share";
 	};
 
 	programs.quickshell.enable = true;

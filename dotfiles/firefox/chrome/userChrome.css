@@ -1,12 +1,12 @@
 /* layout */
 
 :root{
-    --tab-min-height: 50px !important;
+    --tab-min-height: 37.5px !important;
     --tabs-navbar-separator-color: transparent !important;
 }
 
 #urlbar-container {
-    --urlbar-container-height: 60px !important;
+    --urlbar-container-height: 45px !important;
 }
 
 #PanelUI-menu-button, #new-tab-button {
@@ -34,16 +34,16 @@
 
     #TabsToolbar{
         margin-left: calc(1325px / 100 * 60) !important;
-        height: 100px !important;
+        height: 75px !important;
     }
 
     #toolbar-items {
-        height: 100px !important;
+        height: 75px !important;
     }
-        
+
     #nav-bar{
         margin-right: calc(100vw - calc(1325px / 100 * 60)) !important;
-        margin-top: -60px !important;
+        margin-top: -45px !important;
         vertical-align: center !important;
     }
     #urlbar-container{
@@ -84,7 +84,7 @@
     
 .tab-background,
 .tab-stack {
-    min-height: calc(var(--TabsHeight) * 1px) !important
+    min-height: var(--tab-min-height) !important
 }
 
 /*  Removes flash before loading pages  */
@@ -155,9 +155,14 @@ fill: currentColor !important; -moz-context-properties: fill !important; list-st
     display: none !important;
 }
 
+#unified-extensions-button,
+#alltabs-button {
+    display: none !important;
+}
+
 
 #urlbar-container, #urlbar, .tab-label {
-    font-size: 18px !important;
+    font-size: 15px !important;
 }
 
 .tab-icon-image {

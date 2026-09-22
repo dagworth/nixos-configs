@@ -87,6 +87,8 @@
 		];
 	};
 
+	services.flatpak.enable = true;
+
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = true;
 
