@@ -7,3 +7,9 @@ fi
 
 alias rb='sudo nixos-rebuild switch -I nixos-config=/home/larry/.config/nixos/configuration.nix'
 alias nc='cd ~/.config/nixos'
+
+anime() {
+  cd ~/projects/animpv
+  nix develop --command npm run dev
+  exit
+}

@@ -3,8 +3,8 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd("kitty -e yazi"))
 hl.bind("SUPER + space", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind("SUPER + C", hl.dsp.window.close())
 
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" -t jpeg - | tee ~/Pictures/\"$(date +%m-%d-%Y-%I:%M%P).jpg\" | wl-copy"))
-hl.bind("Print", hl.dsp.exec_cmd("grim -t jpeg - | tee ~/Pictures/\"$(date +%m-%d-%Y-%I:%M%P).jpg\" | wl-copy"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | tee ~/Pictures/\"$(date +%m-%d-%Y-%I:%M%P).png\" | wl-copy"))
+hl.bind("Print", hl.dsp.exec_cmd("grim - | tee ~/Pictures/\"$(date +%m-%d-%Y-%I:%M%P).png\" | wl-copy"))
 
 hl.bind("SUPER + grave", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
 

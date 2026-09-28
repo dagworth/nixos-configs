@@ -40,6 +40,8 @@
 		grim
 		slurp
 		wl-clipboard
+		vinegar
+		wireshark
 	];
 
 	home.pointerCursor = {

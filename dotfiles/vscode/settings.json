@@ -1,6 +1,7 @@
 {
 	//Maple Mono NF
 	"editor.fontFamily": "'Atkinson Hyperlegible', monospace",
+	"workbench.fontFamily": "'Maple Mono NF'",
 	"editor.fontSize": 16,
 	"terminal.integrated.fontFamily": "'Maple Mono NF'",
 	"editor.tabSize": 5,
